@@ -55,24 +55,24 @@ const userInput =
 
 // Create a recursive function to add new team members
 
-function buildTeam() {
+function createTeam() {
     inquirer.prompt({
         type: "confirm",
         name: "add",
         message: "Add new team member?"
-    }).then(({ add }) => {
-        switch (add) {
-            case true:
-                addMember();
-                break;
-            case false:
-                writeHTML()
+    }).then(add => {
+
+        if (add === true) {
+            createMember()
+        };
+        if (add === false) {
+            createHTML()
         }
-    })
+    });
 }
 
 // Inquirer prompts and creates new team member based on role
-function addMember() {
+function createMember() {
     inquirer.prompt(userInput)
         .then(response => {
             const results = [response.name, response.id, response.email, response.special]
@@ -88,13 +88,13 @@ function addMember() {
                     team.push(new Manager(...results));
                     break;
             }
-            buildTeam()
+            createTeam()
         })
 }
 
 // Writes to team.html file in the output folder using HTML returned from the render function
 
-function writeHTML() {
+function createHTML() {
     fs.writeFile(outputPath, render(team), (err) => {
         err ? console.error(err) : console.log("success", team)
     })
@@ -102,4 +102,4 @@ function writeHTML() {
 
 // Launch application
 
-buildTeam()
+createTeam()
