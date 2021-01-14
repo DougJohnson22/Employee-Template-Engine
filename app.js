@@ -13,13 +13,13 @@ const render = require("./lib/htmlRenderer");
 const team = []
 
 // An array of questions to prompt inquirer npm
-const promptUser =
+const userInput =
     [
         {
             type: "list",
-            message: "What role are you?",
+            message: "What is your role in the company?",
             name: "role",
-            choices: ['manager', 'engineer', 'intern', 'quit']
+            choices: ['Manager', 'Engineer', 'Intern', 'Quit']
         },
         {
             type: "input",
@@ -39,14 +39,14 @@ const promptUser =
         {
             type: "input",
             name: "special",
-            message: function (response) {
+            message: (response) => {
                 switch (response.role) {
                     case "Engineer":
-                        return "Github:"
+                        return "Github:";
                     case "Intern":
-                        return "School:"
+                        return "School:";
                     case "Manager":
-                        return "Office Number:"
+                        return "Office Number:";
                 }
             }
         }
@@ -79,9 +79,10 @@ function buildTeam() {
 
 // Inquirer prompts and creates new team member based on role
 function addMember() {
-    inquirer.prompt(promptUser)
+    inquirer.prompt(userInput)
         .then(response => {
             const parameters = [response.name, response.id, response.email, response.special]
+
             switch (response.role) {
                 case "Engineer":
                     team.push(new Engineer(...parameters));
@@ -101,9 +102,10 @@ function addMember() {
 
 function writeHTML() {
     fs.writeFile(outputPath, render(team), (err) => {
-        err ? console.error(err) : console.log("success")
+        err ? console.error(err) : console.log("success", team)
     })
 }
 
 // Launch application
+
 buildTeam()

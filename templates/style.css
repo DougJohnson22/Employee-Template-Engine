@@ -1,0 +1,16 @@
+img {
+    opacity: .3;
+}
+
+.jumbotron {
+    background-image: url("https://wallpaperaccess.com/full/3913646.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.employee-card {
+    width: 18rem;
+    box-shadow: 5px 10px;
+}
