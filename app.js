@@ -22,19 +22,19 @@ const promptUser =
             choices: ['manager', 'engineer', 'intern', 'quit']
         },
         {
-            type: "input"
-                message: "What is your name?"
-                name: "name"
+            type: "input",
+            message: "What is your name?",
+            name: "name",
         },
         {
-            type: "input"
-                message: "What is your ID number?"
-                name: "id"
+            type: "input",
+            message: "What is your ID number?",
+            name: "id",
         },
         {
-            type: "input"
-                message: "What is your Email address?"
-                name: "email"
+            type: "input",
+            message: "What is your Email address?",
+            name: "email",
         },
         {
             type: "input",
@@ -79,7 +79,7 @@ function buildTeam() {
 
 // Inquirer prompts and creates new team member based on role
 function addMember() {
-    inquirer.prompt(questions)
+    inquirer.prompt(promptUser)
         .then(response => {
             const parameters = [response.name, response.id, response.email, response.special]
             switch (response.role) {
@@ -97,8 +97,13 @@ function addMember() {
         })
 }
 
+// Writes to team.html file in the output folder using HTML returned from the render function
+
 function writeHTML() {
     fs.writeFile(outputPath, render(team), (err) => {
         err ? console.error(err) : console.log("success")
     })
 }
+
+// Launch application
+buildTeam()
