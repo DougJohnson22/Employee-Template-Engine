@@ -66,13 +66,7 @@ function buildTeam() {
                 addMember();
                 break;
             case false:
-                if (!fs.existsSync(OUTPUT_DIR)) {
-                    fs.mkdir("output", () => {
-                        writeHTML()
-                    })
-                } else {
-                    writeHTML()
-                }
+                writeHTML()
         }
     })
 }
@@ -81,17 +75,17 @@ function buildTeam() {
 function addMember() {
     inquirer.prompt(userInput)
         .then(response => {
-            const parameters = [response.name, response.id, response.email, response.special]
+            const results = [response.name, response.id, response.email, response.special]
 
             switch (response.role) {
                 case "Engineer":
-                    team.push(new Engineer(...parameters));
+                    team.push(new Engineer(...results));
                     break;
                 case "Intern":
-                    team.push(new Intern(...parameters));
+                    team.push(new Intern(...results));
                     break;
                 case "Manager":
-                    team.push(new Manager(...parameters));
+                    team.push(new Manager(...results));
                     break;
             }
             buildTeam()
