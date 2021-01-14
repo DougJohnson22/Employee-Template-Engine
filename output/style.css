@@ -13,4 +13,5 @@ img {
 .employee-card {
     width: 18rem;
     box-shadow: 5px 10px;
+    margin: 10px;
 }
