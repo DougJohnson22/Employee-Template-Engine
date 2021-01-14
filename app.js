@@ -77,17 +77,17 @@ function createMember() {
         .then(response => {
             const results = [response.name, response.id, response.email, response.special]
 
-            switch (response.role) {
-                case "Engineer":
-                    team.push(new Engineer(...results));
-                    break;
-                case "Intern":
-                    team.push(new Intern(...results));
-                    break;
-                case "Manager":
-                    team.push(new Manager(...results));
-                    break;
+            if (response.role === "Engineer") {
+                team.push(new Engineer(...results))
+            };
+            if (response.role === "Intern") {
+                team.push(new Intern(...results))
+            };
+            if (response.role === "Manager") {
+                team.push(new Manager(...results))
             }
+            else { return }
+
             createTeam()
         })
 }
